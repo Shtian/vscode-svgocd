@@ -1,0 +1,306 @@
+{
+    "name": "svgocd",
+    "displayName": "SVGOCD",
+    "description": "SVGO extension for VS Code, fully configurable.",
+    "version": "0.1.0",
+    "engines": {
+        "vscode": "^1.36.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/shtian/vscode-svgocd.git"
+    },
+    "activationEvents": [
+        "onCommand:extension.svgocd"
+    ],
+    "main": "./out/extension.js",
+    "bugs": {
+        "url": "https://github.com/shtian/vscode-svgocd/issues"
+    },
+    "homepage": "https://github.com/shtian/vscode-svgocd#readme",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.svgocd",
+                "title": "SVGOCD: Run"
+            }
+        ],
+        "configuration":[
+            {
+                "title": "SVGOCD",
+                "properties": {
+                    "svgocd.plugins.cleanupAttrs": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "cleanup attributes from newlines, trailing, and repeating spaces"
+                    },
+                    "svgocd.plugins.inlineStyles": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "move and merge styles from <style> elements to element style attributes"
+                    },
+                    "svgocd.plugins.removeDoctype": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove doctype declaration"
+                    },
+                    "svgocd.plugins.removeXMLProcInst": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove XML processing instructions"
+                    },
+                    "svgocd.plugins.removeComments": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove comments"
+                    },
+                    "svgocd.plugins.removeMetadata": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove <metadata>"
+                    },
+                    "svgocd.plugins.removeTitle": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove <title>"
+                    },
+                    "svgocd.plugins.removeDesc": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove <desc>"
+                    },
+                    "svgocd.plugins.removeUselessDefs": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove elements of <defs> without id"
+                    },
+                    "svgocd.plugins.removeXMLNS": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "removes xmlns attribute (for inline svg, disabled by default)"
+                    },
+                    "svgocd.plugins.removeEditorsNSData": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove editors namespaces, elements, and attributes"
+                    },
+                    "svgocd.plugins.removeEmptyAttrs": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove empty attributes"
+                    },
+                    "svgocd.plugins.removeHiddenElems": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove hidden elements"
+                    },
+                    "svgocd.plugins.removeEmptyText": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove empty Text elements"
+                    },
+                    "svgocd.plugins.removeEmptyContainers": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove empty Container elements"
+                    },
+                    "svgocd.plugins.removeViewBox": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove viewBox attribute when possible"
+                    },
+                    "svgocd.plugins.cleanupEnableBackground": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove or cleanup enable-background attribute when possible"
+                    },
+                    "svgocd.plugins.minifyStyles": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "minify <style> elements content with CSSO"
+                    },
+                    "svgocd.plugins.convertStyleToAttrs": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "convert styles into attributes"
+                    },
+                    "svgocd.plugins.convertColors": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "convert colors (from rgb() to #rrggbb, from #rrggbb to #rgb)"
+                    },
+                    "svgocd.plugins.convertPathData": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "convert Path data to relative or absolute (whichever is shorter), convert one segment to another, trim useless delimiters, smart rounding, and much more"
+                    },
+                    "svgocd.plugins.convertTransform": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "collapse multiple transforms into one, convert matrices to the short aliases, and much more"
+                    },
+                    "svgocd.plugins.removeUnknownsAndDefaults": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove unknown elements content and attributes, remove attrs with default values"
+                    },
+                    "svgocd.plugins.removeNonInheritableGroupAttrs": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove non-inheritable group's 'presentation' attributes"
+                    },
+                    "svgocd.plugins.removeUselessStrokeAndFill": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove useless stroke and fill attrs"
+                    },
+                    "svgocd.plugins.removeUnusedNS": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove unused namespaces declaration"
+                    },
+                    "svgocd.plugins.prefixIds": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "prefix IDs and classes with the SVG filename or an arbitrary string"
+                    },
+                    "svgocd.plugins.cleanupIDs": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "remove unused and minify used IDs"
+                    },
+                    "svgocd.plugins.cleanupNumericValues": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "round numeric values to the fixed precision, remove default px units"
+                    },
+                    "svgocd.plugins.cleanupListOfValues": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "round numeric values in attributes that take a list of numbers (like viewBox or enable-background)"
+                    },
+                    "svgocd.plugins.moveElemsAttrsToGroup": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "move elements' attributes to their enclosing group"
+                    },
+                    "svgocd.plugins.moveGroupAttrsToElems": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "move some group attributes to the contained elements"
+                    },
+                    "svgocd.plugins.collapseGroups": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "collapse useless groups"
+                    },
+                    "svgocd.plugins.removeRasterImages": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "remove raster images (disabled by default)"
+                    },
+                    "svgocd.plugins.mergePaths": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "merge multiple Paths into one"
+                    },
+                    "svgocd.plugins.convertShapeToPath": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "convert some basic shapes to <path>"
+                    },
+                    "svgocd.plugins.convertEllipseToCircle": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "convert non-eccentric <ellipse> to <circle>"
+                    },
+                    "svgocd.plugins.sortAttrs": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "sort element attributes for epic readability (disabled by default)"
+                    },
+                    "svgocd.plugins.sortDefsChildren": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "sort children of <defs> in order to improve compression"
+                    },
+                    "svgocd.plugins.removeDimensions": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "remove width/height and add viewBox if it's missing (opposite to removeViewBox, disable it first) (disabled by default)"
+                    },                    
+                    "svgocd.plugins.removeAttrs": {
+                        "type": "object",
+                        "default": {},
+                        "description": "remove attributes by pattern (disabled by default)"
+                    },
+                    "svgocd.plugins.removeAttributesBySelector": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "removes attributes of elements that match a css selector (disabled by default)"
+                    },
+                    "svgocd.plugins.removeElementsByAttr": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "remove arbitrary elements by ID or className (disabled by default)"
+                    },
+                    "svgocd.plugins.addClassesToSVGElement": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "add classnames to an outer <svg> element (disabled by default)"
+                    },
+                    "svgocd.plugins.addAttributesToSVGElement": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "adds attributes to an outer <svg> element (disabled by default)"
+                    },
+                    "svgocd.plugins.removeOffCanvasPaths": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "removes elements that are drawn outside of the viewbox (disabled by default)"
+                    },
+                    "svgocd.plugins.removeStyleElement": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "remove <style> elements (disabled by default)"
+                    },
+                    "svgocd.plugins.removeScriptElement": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "remove <script> elements (disabled by default)"
+                    },
+                    "svgocd.plugins.reusePaths": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Find duplicated elements and replace them with links (disabled by default)"
+                    }
+                }
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile",
+        "test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/glob": "^7.1.1",
+        "@types/mocha": "^5.2.7",
+        "@types/node": "^12.6.9",
+        "@types/svgo": "^1.2.1",
+        "@types/vscode": "^1.36.0",
+        "glob": "^7.1.4",
+        "mocha": "^6.2.0",
+        "tslint": "^5.18.0",
+        "typescript": "^3.5.3",
+        "vscode-test": "^1.1.0"
+    },
+    "dependencies": {
+        "svgo": "^1.3.0"
+    }
+}
