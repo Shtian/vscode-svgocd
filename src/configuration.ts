@@ -3,14 +3,19 @@ import * as vscode from 'vscode';
 
 const readConfiguration = (): SVGO.Options => {
     const svgocdConfig = vscode.workspace.getConfiguration('svgocd');
-    const pluginsConf: [string]: any = svgocdConfig.get('plugins') ;
-    const plugins = [];
-    //TODO: fix types
-    Object.keys(pluginsConf).map(c => {
-        const propName = c as string;
-        plugins.push({propName: pluginsConf[propName]})
+    const pluginsConf = svgocdConfig.get<any>('plugins');
+
+    if (typeof pluginsConf === 'undefined') {
+        return { plugins: [] };
+    }
+
+    const plugins: any[] = [];
+
+    Object.keys(pluginsConf).map((c) => {
+        plugins.push({ [c]: pluginsConf[c] });
     });
-    return { plugins: [] };
+
+    return { plugins };
 };
 
 export default readConfiguration;
