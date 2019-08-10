@@ -1,8 +1,8 @@
-import * as SVGO from 'svgo';
-import * as vscode from 'vscode';
+import { Options } from 'svgo';
+import { workspace } from 'vscode';
 
-const readConfiguration = (): SVGO.Options => {
-    const svgocdConfig = vscode.workspace.getConfiguration('svgocd');
+const readConfiguration = (): Options => {
+    const svgocdConfig = workspace.getConfiguration('svgocd');
     const pluginsConf = svgocdConfig.get<any>('plugins');
 
     if (typeof pluginsConf === 'undefined') {

@@ -1,9 +1,9 @@
 import * as SVGO from 'svgo';
-import * as vscode from 'vscode';
+import {window, Range} from 'vscode';
 import readConfiguration from './configuration';
 
 const readCurrentFileContent = () => {
-    const editor = vscode.window.activeTextEditor;
+    const editor = window.activeTextEditor;
     if (typeof editor === 'undefined') {
         return null;
     }
@@ -17,12 +17,12 @@ const readCurrentFileContent = () => {
 };
 
 const replaceDocument = (data: string) => {
-    const editor = vscode.window.activeTextEditor;
+    const editor = window.activeTextEditor;
     if (typeof editor === 'undefined') {
         return null;
     }
 
-    let documentRange = new vscode.Range(0, 0, editor.document.lineCount, 0);
+    let documentRange = new Range(0, 0, editor.document.lineCount, 0);
     let validatedRange = editor.document.validateRange(documentRange);
 
     editor.edit((editBuilder) => {
@@ -40,7 +40,7 @@ const optimizeSVG = async () => {
         const optimizedSVG = await svgo.optimize(text);
         replaceDocument(optimizedSVG.data);
     } else {
-        vscode.window.showErrorMessage('No valid SVG file open!');
+        window.showErrorMessage('This extension can only be run with an SVG file open.');
     }
 };
 
