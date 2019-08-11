@@ -21,9 +21,14 @@ export default class OptimizeSVGO {
         const text = readCurrentFileContent();
 
         if (text) {
-            const svgo = new SVGO(this.svgoConfiguration);
-            const optimizedSVG = await svgo.optimize(text);
-            replaceDocument(optimizedSVG.data);
+            try {
+                const svgo = new SVGO(this.svgoConfiguration);
+                const optimizedSVG = await svgo.optimize(text);
+                replaceDocument(optimizedSVG.data);
+                window.showInformationMessage('SVG Optimized ✨');
+            } catch (error) {
+                window.showErrorMessage(`Error during SVG Optimization: ${error}`);
+            }
         } else {
             window.showErrorMessage('This extension can only be run with an SVG file open.');
         }
