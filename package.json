@@ -285,6 +285,9 @@
         ]
     },
     "scripts": {
+        "publish:patch": "vsce publish -m 'Patch version %s'",
+        "publish:minor": "vsce publish -m 'Minor version %s'",
+        "publish:major": "vsce publish -m 'Major version %s'",
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
