@@ -1,21 +1,29 @@
 import { Options } from 'svgo';
 import { workspace } from 'vscode';
 
-const readConfiguration = (): Options => {
-    const svgocdConfig = workspace.getConfiguration('svgocd');
-    const pluginsConf = svgocdConfig.get<any>('plugins');
+export const readConfiguration = (section: string, value: string): any => {
+    const configSection = workspace.getConfiguration(section);
+    const configValue = configSection.get<any>(value);
 
-    if (typeof pluginsConf === 'undefined') {
-        return { plugins: [] };
+    if (typeof configValue === 'undefined') {
+        return null;
     }
 
+    return configValue;
+};
+
+export const getSVGOPluginsConfig = (): Options => {
+    const pluginsValues = readConfiguration('svgocd', 'plugins');
+    // TODO: Read .svgo.y(a)ml with js.yaml
     const plugins: any[] = [];
 
-    Object.keys(pluginsConf).map((c) => {
-        plugins.push({ [c]: pluginsConf[c] });
+    if (!pluginsValues) {
+        return { plugins };
+    }
+
+    Object.keys(pluginsValues).map((c) => {
+        plugins.push({ [c]: pluginsValues[c] });
     });
 
     return { plugins };
 };
-
-export default readConfiguration;
