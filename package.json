@@ -2,6 +2,8 @@
     "name": "svgocd",
     "displayName": "SVGOCD",
     "description": "SVGO extension for VS Code, fully configurable.",
+    "publisher": "shtian",
+    "author": "Stian Haga <hagastian@gmail.com> (https://github.com/shtian)",
     "version": "0.1.0",
     "engines": {
         "vscode": "^1.36.0"
