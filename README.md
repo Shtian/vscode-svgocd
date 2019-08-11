@@ -1,4 +1,4 @@
-<img src="https://github.com/shtian/vscode-svgocd/raw/master/images/logo-narrow.png" alt="drawing" width="200"/>
+<img src="https://github.com/shtian/vscode-svgocd/raw/master/images/logo-narrow.png" alt="drawing" width="300"/>
 
 ## Features
 
