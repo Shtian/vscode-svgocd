@@ -1,47 +1,69 @@
 import * as SVGO from 'svgo';
-import {window, Range} from 'vscode';
+import { window, Range, workspace } from 'vscode';
 import readConfiguration from './configuration';
 
-const readCurrentFileContent = () => {
-    const editor = window.activeTextEditor;
-    if (typeof editor === 'undefined') {
-        return null;
+export default class OptimizeSVGO {
+    private svgoConfiguration: SVGO.Options;
+
+    constructor() {
+        this.svgoConfiguration = readConfiguration();
     }
 
-    const doc = editor.document;
-    if (!/\.svg$/i.test(doc.fileName)) {
-        return null;
+    public async optimizeSVG() {
+        //TODO: support text selection
+        const text = this.readCurrentFileContent();
+
+        if (text) {
+            const svgo = new SVGO(this.svgoConfiguration);
+            const optimizedSVG = await svgo.optimize(text);
+            this.replaceDocument(optimizedSVG.data);
+        } else {
+            window.showErrorMessage('This extension can only be run with an SVG file open.');
+        }
     }
 
-    return doc.getText();
-};
+    public readConfiguration() {
+        const svgocdConfig = workspace.getConfiguration('svgocd');
+        const pluginsConf = svgocdConfig.get<any>('plugins');
 
-const replaceDocument = (data: string) => {
-    const editor = window.activeTextEditor;
-    if (typeof editor === 'undefined') {
-        return null;
+        if (typeof pluginsConf === 'undefined') {
+            return { plugins: [] };
+        }
+
+        const plugins: any[] = [];
+
+        Object.keys(pluginsConf).map((c) => {
+            plugins.push({ [c]: pluginsConf[c] });
+        });
+
+        return { plugins };
     }
 
-    let documentRange = new Range(0, 0, editor.document.lineCount, 0);
-    let validatedRange = editor.document.validateRange(documentRange);
+    private readCurrentFileContent() {
+        const editor = window.activeTextEditor;
+        if (typeof editor === 'undefined') {
+            return null;
+        }
 
-    editor.edit((editBuilder) => {
-        editBuilder.replace(validatedRange, data);
-    });
-};
+        const doc = editor.document;
+        if (!/\.svg$/i.test(doc.fileName)) {
+            return null;
+        }
 
-const optimizeSVG = async () => {
-    //TODO: support text selection
-    const text = readCurrentFileContent();
-
-    if (text) {
-        const config = readConfiguration();
-        const svgo = new SVGO(config);
-        const optimizedSVG = await svgo.optimize(text);
-        replaceDocument(optimizedSVG.data);
-    } else {
-        window.showErrorMessage('This extension can only be run with an SVG file open.');
+        return doc.getText();
     }
-};
 
-export default optimizeSVG;
+    private replaceDocument(data: string) {
+        const editor = window.activeTextEditor;
+        if (typeof editor === 'undefined') {
+            return null;
+        }
+
+        let documentRange = new Range(0, 0, editor.document.lineCount, 0);
+        let validatedRange = editor.document.validateRange(documentRange);
+
+        editor.edit((editBuilder) => {
+            editBuilder.replace(validatedRange, data);
+        });
+    }
+}
