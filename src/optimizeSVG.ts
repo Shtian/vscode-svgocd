@@ -1,7 +1,7 @@
 import * as SVGO from 'svgo';
 import { window } from 'vscode';
 import { getSVGOConfig } from './configuration';
-import { readCurrentFileContent, replaceDocument } from './utils';
+import { readCurrentFileContent, replaceDocument, readCurrentSelection, replaceSelection } from './utils';
 
 export default class OptimizeSVGO {
     private svgoConfiguration: SVGO.Options;
@@ -16,20 +16,30 @@ export default class OptimizeSVGO {
     }
 
     public async optimizeSVG() {
-        //TODO: support text selection
+        const selection = readCurrentSelection();
         const text = readCurrentFileContent();
+        const svgToOptimize = selection || text;
 
-        if (text) {
-            try {
-                const svgo = new SVGO(this.svgoConfiguration);
-                const optimizedSVG = await svgo.optimize(text);
+        if (!svgToOptimize) {
+            window.showErrorMessage(
+                'This extension can only be run with an SVG file open or having an SVG selected in the current document.'
+            );
+            return;
+        }
+
+        try {
+            const svgo = new SVGO(this.svgoConfiguration);
+            const optimizedSVG = await svgo.optimize(svgToOptimize);
+
+            if (selection) {
+                replaceSelection(optimizedSVG.data);
+            } else {
                 replaceDocument(optimizedSVG.data);
-                window.showInformationMessage('SVG Optimized ✨');
-            } catch (error) {
-                window.showErrorMessage(`Error during SVG Optimization: ${error}`);
             }
-        } else {
-            window.showErrorMessage('This extension can only be run with an SVG file open.');
+
+            window.showInformationMessage('SVG Optimized ✨');
+        } catch (error) {
+            window.showErrorMessage(`Error during SVG Optimization: ${error}`);
         }
     }
 }
