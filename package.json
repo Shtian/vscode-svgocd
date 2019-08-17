@@ -436,6 +436,20 @@
                         ],
                         "default": false,
                         "description": "Find duplicated elements and replace them with links (disabled by default)"
+                    },
+                    "svgocd.js2svg.pretty": {
+                        "type": [
+                            "boolean"
+                        ],
+                        "default": false,
+                        "description": "Pretty print SVGs"
+                    },
+                    "svgocd.js2svg.indent": {
+                        "type": [
+                            "number"
+                        ],
+                        "default": 4,
+                        "description": "Indent number when pretty printing SVGs"
                     }
                 }
             }
