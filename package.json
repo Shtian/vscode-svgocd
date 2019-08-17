@@ -468,6 +468,7 @@
     },
     "devDependencies": {
         "@types/glob": "^7.1.1",
+        "@types/js-yaml": "^3.12.1",
         "@types/mocha": "^5.2.7",
         "@types/node": "^12.6.9",
         "@types/svgo": "^1.2.1",
@@ -479,6 +480,8 @@
         "vscode-test": "^1.1.0"
     },
     "dependencies": {
+        "deepmerge": "^4.0.0",
+        "js-yaml": "^3.13.1",
         "svgo": "^1.3.0"
     }
 }

@@ -4,9 +4,33 @@
 
 Supports running SVGO on the current open SVG file in VS Code. Simply open the command palette and type SVGOCD and you should find the command `SVGOCD: Optimize current SVG`
 
-## Extension Settings
+## Settings
+Settings can either be configured from the extension settings or having a .svgo.yml file in the root directory. A .svgo.yml file will override the extension settings.
+
+### Config file
+  
+```yaml
+plugins:
+  - removeDoctype
+  - removeXMLProcInst
+  - removeComments
+  - removeMetadata
+  - removeXMLNS
+  - removeEditorsNSData
+  - cleanupAttrs: false  
+  - removeTitle: true
+
+js2svg:
+  pretty: true
+  indent: 2
+```
+
+### Extension settings
 Supports all SVGO plguin settings through extension settings (`svgocd.plugins.*`). Boolean values to enable/disable or object values for plugin settings can be used. Full list of plugins from https://github.com/svg/svgo :
 
+<details>
+  <summary>View all plugin settings</summary>
+  
 | Plugin | Description |
 | ------ | ----------- |
 | [cleanupAttrs](https://github.com/svg/svgo/blob/master/plugins/cleanupAttrs.js) | cleanup attributes from newlines, trailing, and repeating spaces |
@@ -58,3 +82,5 @@ Supports all SVGO plguin settings through extension settings (`svgocd.plugins.*`
 | [removeStyleElement](https://github.com/svg/svgo/blob/master/plugins/removeStyleElement.js) | remove `<style>` elements (disabled by default) |
 | [removeScriptElement](https://github.com/svg/svgo/blob/master/plugins/removeScriptElement.js) | remove `<script>` elements (disabled by default) |
 | [reusePaths](https://github.com/svg/svgo/blob/master/plugins/reusePaths.js) | Find duplicated <path> elements and replace them with <use> links (disabled by default) |
+
+</details>

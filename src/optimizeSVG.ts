@@ -9,11 +9,10 @@ export default class OptimizeSVGO {
     constructor() {
         this.svgoConfiguration = { plugins: [] };
         this.readConfiguration();
-        // TODO: read .svgo.yml
     }
 
-    public readConfiguration() {
-        this.svgoConfiguration = getSVGOConfig();
+    public async readConfiguration() {
+        this.svgoConfiguration = await getSVGOConfig();
     }
 
     public async optimizeSVG() {

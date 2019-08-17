@@ -16,6 +16,11 @@ export function activate(context: ExtensionContext) {
             if (e.affectsConfiguration('svgocd')) {
                 svgocd.readConfiguration();
             }
+        }),
+        workspace.onDidSaveTextDocument(doc => {
+            if(/(\.svgo\.ya?ml)/.test(doc.fileName)){
+                svgocd.readConfiguration();
+            }
         })
     );
 }
