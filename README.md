@@ -2,7 +2,9 @@
 
 ## Features
 
-Supports running SVGO on the current open SVG file in VS Code. Simply open the command palette and type SVGOCD and you should find the command `SVGOCD: Optimize current SVG`
+Supports running SVGO on the current open SVG file in VS Code or currently selected SVG. Simply open the command palette and type SVGOCD and you should find the command `SVGOCD: Optimize current SVG`.
+
+Also supports editing plugin settings from both extension settings or through having a .svgo.yaml file in the root folder.
 
 ## Settings
 Settings can either be configured from the extension settings or having a .svgo.yml file in the root directory. A .svgo.yml file will override the extension settings.
