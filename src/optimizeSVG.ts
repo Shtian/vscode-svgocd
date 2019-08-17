@@ -1,6 +1,6 @@
 import * as SVGO from 'svgo';
 import { window } from 'vscode';
-import { getSVGOPluginsConfig } from './configuration';
+import { getSVGOConfig } from './configuration';
 import { readCurrentFileContent, replaceDocument } from './utils';
 
 export default class OptimizeSVGO {
@@ -13,7 +13,7 @@ export default class OptimizeSVGO {
     }
 
     public readConfiguration() {
-        this.svgoConfiguration = getSVGOPluginsConfig();
+        this.svgoConfiguration = getSVGOConfig();
     }
 
     public async optimizeSVG() {

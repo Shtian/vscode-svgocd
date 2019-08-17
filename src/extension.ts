@@ -13,7 +13,7 @@ export function activate(context: ExtensionContext) {
     // Refresh svgocd config on relevant change
     context.subscriptions.push(
         workspace.onDidChangeConfiguration((e) => {
-            if (e.affectsConfiguration('svgocd.plugins')) {
+            if (e.affectsConfiguration('svgocd')) {
                 svgocd.readConfiguration();
             }
         })
