@@ -12,8 +12,8 @@ export default class OptimizeSVGO {
         // TODO: read .svgo.yml
     }
 
-    public readConfiguration() {
-        this.svgoConfiguration = getSVGOConfig();
+    public async readConfiguration() {
+        this.svgoConfiguration = await getSVGOConfig();
     }
 
     public async optimizeSVG() {
