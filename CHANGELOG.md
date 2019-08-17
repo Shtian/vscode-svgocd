@@ -1,4 +1,10 @@
 # Change Log
+## [1.0.0]
+
+- **feature**: support optimizing currently selected text
+- **feature**: support reading .svgo.yml
+- **feature**: support js2svg settings for pretty printing
+
 ## [0.1.6]
 
 - fix: use HTTPS protocol for repo link in package.json
