@@ -9,7 +9,6 @@ export default class OptimizeSVGO {
     constructor() {
         this.svgoConfiguration = { plugins: [] };
         this.readConfiguration();
-        // TODO: read .svgo.yml
     }
 
     public async readConfiguration() {
