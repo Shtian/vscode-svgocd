@@ -1,4 +1,8 @@
 # Change Log
+## [0.1.6]
+
+- fix: use HTTPS protocol for repo link in package.json
+
 ## [0.1.5]
 
 - docs: update CHANGELOG.md
