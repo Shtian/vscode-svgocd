@@ -1,5 +1,7 @@
 <img src="https://github.com/shtian/vscode-svgocd/raw/master/images/logo_transparent_narrow.png" alt="logo" width="300"/>
 
+[![Build Status](https://dev.azure.com/hagastian/SVGOCD/_apis/build/status/Shtian.vscode-svgocd?branchName=master)](https://dev.azure.com/hagastian/SVGOCD/_build/latest?definitionId=1&branchName=master)
+
 ## Features
 
 Supports running SVGO on the current open SVG file in VS Code or currently selected SVG. Simply open the command palette and type SVGOCD and you should find the command `SVGOCD: Optimize current SVG`.
