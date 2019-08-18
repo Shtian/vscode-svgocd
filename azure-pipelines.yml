@@ -3,7 +3,9 @@ trigger:
     include:
     - '*'
 pr:
-- master
+  branches:
+    include:
+    - '*'
 
 pool:
   vmImage: 'ubuntu-latest'
