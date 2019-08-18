@@ -1,0 +1,25 @@
+trigger:
+- master
+- greenkeeper/*
+pr:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+strategy:
+  matrix:
+    node_10_x:
+      node_version: 10.x
+    node_12_x:
+      node_version: 12.x
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: $(node_version)
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    npm run compile
+  displayName: 'npm install and build'
