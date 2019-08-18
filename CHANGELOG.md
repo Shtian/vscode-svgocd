@@ -1,4 +1,10 @@
 # Change Log
+
+## [1.0.1]
+
+- docs: update readme
+- chore: replace tslint with eslint and add prettier
+
 ## [1.0.0]
 
 - **feature**: support optimizing currently selected text
