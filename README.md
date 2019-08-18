@@ -1,5 +1,7 @@
 <img src="https://github.com/shtian/vscode-svgocd/raw/master/images/logo_transparent_narrow.png" alt="logo" width="300"/>
 
+[![Build Status](https://dev.azure.com/hagastian/SVGOCD/_apis/build/status/Shtian.vscode-svgocd?branchName=master)](https://dev.azure.com/hagastian/SVGOCD/_build/latest?definitionId=1&branchName=master) <img alt="code style: prettier" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg"> <img alt="code style: prettier" src="https://img.shields.io/visual-studio-marketplace/d/shtian.svgocd">
+
 ## Features
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/Shtian/vscode-svgocd.svg)](https://greenkeeper.io/)

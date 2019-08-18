@@ -25,4 +25,5 @@ steps:
 - script: |
     npm install
     npm run compile
-  displayName: 'npm install and build'
+    npm run lint
+  displayName: 'npm install, build and lint'

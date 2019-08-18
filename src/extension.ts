@@ -1,28 +1,26 @@
 import { commands, ExtensionContext, workspace } from 'vscode';
 import optimizeSVG from './optimizeSVG';
 
-export function activate(context: ExtensionContext) {
-    const svgocd = new optimizeSVG();
+export function activate(context: ExtensionContext): void {
+  const svgocd = new optimizeSVG();
 
-    // Register Run command
-    let disposable = commands.registerCommand('svgocd.run-current', () => {
-        svgocd.optimizeSVG();
-    });
-    context.subscriptions.push(disposable);
+  // Register Run command
+  const disposable = commands.registerCommand('svgocd.run-current', () => {
+    svgocd.optimizeSVG();
+  });
+  context.subscriptions.push(disposable);
 
-    // Refresh svgocd config on relevant change
-    context.subscriptions.push(
-        workspace.onDidChangeConfiguration((e) => {
-            if (e.affectsConfiguration('svgocd')) {
-                svgocd.readConfiguration();
-            }
-        }),
-        workspace.onDidSaveTextDocument(doc => {
-            if(/(\.svgo\.ya?ml)/.test(doc.fileName)){
-                svgocd.readConfiguration();
-            }
-        })
-    );
+  // Refresh svgocd config on relevant change
+  context.subscriptions.push(
+    workspace.onDidChangeConfiguration(e => {
+      if (e.affectsConfiguration('svgocd')) {
+        svgocd.readConfiguration();
+      }
+    }),
+    workspace.onDidSaveTextDocument(doc => {
+      if (/(\.svgo\.ya?ml)/.test(doc.fileName)) {
+        svgocd.readConfiguration();
+      }
+    })
+  );
 }
-
-export function deactivate() {}
