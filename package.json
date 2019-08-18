@@ -464,7 +464,7 @@
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
         "pretest": "npm run compile",
-        "test": "node ./out/test/runTest.js"
+        "lint": "eslint src/**/*.ts"
     },
     "devDependencies": {
         "@types/glob": "^7.1.1",
