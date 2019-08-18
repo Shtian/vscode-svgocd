@@ -1,6 +1,7 @@
 trigger:
-- master
-- greenkeeper/*
+  branches:
+    include:
+    - '*'
 pr:
 - master
 
