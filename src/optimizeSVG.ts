@@ -3,7 +3,7 @@ import { window } from 'vscode';
 import { getSVGOConfig } from './configuration';
 import { readCurrentFileContent, replaceDocument, readCurrentSelection, replaceSelection } from './utils';
 
-export default class OptimizeSVGO {
+export default class SVGOCD {
   private svgoConfiguration: SVGO.Options;
 
   constructor() {

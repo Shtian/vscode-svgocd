@@ -1,8 +1,8 @@
 import { commands, ExtensionContext, workspace } from 'vscode';
-import optimizeSVG from './optimizeSVG';
+import SVGOCD from './optimizeSVG';
 
 export function activate(context: ExtensionContext): void {
-  const svgocd = new optimizeSVG();
+  const svgocd = new SVGOCD();
 
   // Register Run command
   const disposable = commands.registerCommand('svgocd.run', () => {
