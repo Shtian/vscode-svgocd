@@ -1,12 +1,18 @@
-<img src="https://github.com/shtian/vscode-svgocd/raw/master/images/logo_transparent_narrow.png" alt="logo" width="300"/>
+<img src="images/logo_transparent_narrow.png" alt="logo" width="300"/>
 
-[![Build Status](https://dev.azure.com/hagastian/SVGOCD/_apis/build/status/Shtian.vscode-svgocd?branchName=master)](https://dev.azure.com/hagastian/SVGOCD/_build/latest?definitionId=1&branchName=master) <img alt="code style: prettier" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg"> <img alt="code style: prettier" src="https://img.shields.io/visual-studio-marketplace/d/shtian.svgocd"> [![Greenkeeper badge](https://badges.greenkeeper.io/Shtian/vscode-svgocd.svg)](https://greenkeeper.io/)
+[![Build Status](https://dev.azure.com/hagastian/SVGOCD/_apis/build/status/Shtian.vscode-svgocd?branchName=master)](https://dev.azure.com/hagastian/SVGOCD/_build/latest?definitionId=1&branchName=master)
+<img alt="code style: prettier" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg">
+[![](https://vsmarketplacebadge.apphb.com/version/shtian.svgocd.svg)](https://marketplace.visualstudio.com/items?itemName=shtian.svgocd)
+<img alt="code style: prettier" src="https://img.shields.io/visual-studio-marketplace/d/shtian.svgocd">
+ [![Greenkeeper badge](https://badges.greenkeeper.io/Shtian/vscode-svgocd.svg)](https://greenkeeper.io/)
 
 ## Features
 
 Supports running SVGO on the current open SVG file in VS Code or currently selected SVG. Simply open the command palette and type SVGOCD and you should find the command `SVGOCD: Optimize current SVG`.
 
 Also supports editing plugin settings from both extension settings or through having a .svgo.yaml file in the root folder.
+
+![Workflow](images/howto.gif)
 
 ## Settings
 Settings can either be configured from the extension settings or having a .svgo.yml file in the root directory. A .svgo.yml file will override the extension settings.
