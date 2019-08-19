@@ -31,14 +31,14 @@
     },
     "homepage": "https://github.com/shtian/vscode-svgocd#readme",
     "activationEvents": [
-        "onCommand:svgocd.run-current"
+        "onCommand:svgocd.run"
     ],
     "main": "./out/extension.js",
     "contributes": {
         "commands": [
             {
-                "command": "svgocd.run-current",
-                "title": "SVGOCD: Optimize current SVG"
+                "command": "svgocd.run",
+                "title": "SVGOCD: Optimize SVG"
             }
         ],
         "configuration": [

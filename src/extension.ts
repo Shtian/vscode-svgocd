@@ -5,7 +5,7 @@ export function activate(context: ExtensionContext): void {
   const svgocd = new optimizeSVG();
 
   // Register Run command
-  const disposable = commands.registerCommand('svgocd.run-current', () => {
+  const disposable = commands.registerCommand('svgocd.run', () => {
     svgocd.optimizeSVG();
   });
   context.subscriptions.push(disposable);
