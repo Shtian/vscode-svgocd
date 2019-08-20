@@ -1,5 +1,5 @@
 import * as SVGO from 'svgo';
-import { window } from 'vscode';
+import { window, workspace } from 'vscode';
 import { getSVGOConfig } from './configuration';
 import { readCurrentFileContent, replaceDocument, readCurrentSelection, replaceSelection, getFileSize, getOptimizedPercentage } from './utils';
 
