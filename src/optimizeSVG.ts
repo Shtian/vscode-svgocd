@@ -37,6 +37,12 @@ export default class SVGOCD {
         await replaceDocument(optimizedSVG.data);
       }
 
+      const editor = window.activeTextEditor;
+      if (typeof editor === 'undefined') {
+        return false;
+      }
+      await editor.document.save();
+
       const afterFileSize = getFileSize();
       const optimizedPercentage = getOptimizedPercentage(beforeFileSize, afterFileSize);
 
