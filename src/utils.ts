@@ -69,5 +69,6 @@ export const getFileSize = (): number | null => {
 }
 
 export const getOptimizedPercentage = (fileSizeBefore: number, fileSizeAfter: number): number => {
-  return (fileSizeAfter / fileSizeBefore) * 100;
+  if (fileSizeBefore === fileSizeAfter) return 0;
+  return Math.round((fileSizeAfter / fileSizeBefore) * 100);
 }

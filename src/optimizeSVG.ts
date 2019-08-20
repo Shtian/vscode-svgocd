@@ -20,6 +20,7 @@ export default class SVGOCD {
     const text = readCurrentFileContent();
     const beforeFileSize = getFileSize();
     const svgToOptimize = selection || text;
+    let infoMessage = 'SVG Optimized ✨';
 
     if (!svgToOptimize) {
       window.showErrorMessage(
@@ -44,9 +45,13 @@ export default class SVGOCD {
       await editor.document.save();
 
       const afterFileSize = getFileSize();
-      const optimizedPercentage = getOptimizedPercentage(beforeFileSize, afterFileSize);
 
-      window.showInformationMessage(`SVG Optimized ✨ ${optimizedPercentage}%`);
+      if (afterFileSize && beforeFileSize) {
+        const optimizedPercentage = getOptimizedPercentage(beforeFileSize, afterFileSize);
+        infoMessage += `${optimizedPercentage}%`;
+      }
+
+      window.showInformationMessage(infoMessage);
       return true;
     } catch (error) {
       window.showErrorMessage(`Error during SVG Optimization: ${error}`);
