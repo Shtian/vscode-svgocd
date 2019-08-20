@@ -1,7 +1,7 @@
 import * as SVGO from 'svgo';
 import { window } from 'vscode';
 import { getSVGOConfig } from './configuration';
-import { readCurrentFileContent, replaceDocument, readCurrentSelection, replaceSelection } from './utils';
+import { readCurrentFileContent, replaceDocument, readCurrentSelection, replaceSelection, getFileSize, getOptimizedPercentage } from './utils';
 
 export default class SVGOCD {
   private svgoConfiguration: SVGO.Options;
@@ -18,6 +18,7 @@ export default class SVGOCD {
   public async optimizeSVG(): Promise<boolean> {
     const selection = readCurrentSelection();
     const text = readCurrentFileContent();
+    const beforeFileSize = getFileSize();
     const svgToOptimize = selection || text;
 
     if (!svgToOptimize) {
@@ -30,14 +31,16 @@ export default class SVGOCD {
     try {
       const svgo = new SVGO(this.svgoConfiguration);
       const optimizedSVG = await svgo.optimize(svgToOptimize);
-
       if (selection) {
-        replaceSelection(optimizedSVG.data);
+        await replaceSelection(optimizedSVG.data);
       } else {
-        replaceDocument(optimizedSVG.data);
+        await replaceDocument(optimizedSVG.data);
       }
 
-      window.showInformationMessage('SVG Optimized ✨');
+      const afterFileSize = getFileSize();
+      const optimizedPercentage = getOptimizedPercentage(beforeFileSize, afterFileSize);
+
+      window.showInformationMessage(`SVG Optimized ✨ ${optimizedPercentage}%`);
       return true;
     } catch (error) {
       window.showErrorMessage(`Error during SVG Optimization: ${error}`);
