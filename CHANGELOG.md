@@ -1,5 +1,9 @@
 # Change Log
 
+## [1.1.0]
+
+- **feature**: add percentage file size change after optimization (by @lazreg87)
+
 ## [1.0.1]
 
 - docs: update readme
