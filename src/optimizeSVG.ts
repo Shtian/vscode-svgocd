@@ -48,7 +48,11 @@ export default class SVGOCD {
 
       if (afterFileSize && beforeFileSize) {
         const optimizedPercentage = getOptimizedPercentage(beforeFileSize, afterFileSize);
-        infoMessage += `${optimizedPercentage}%`;
+        if (optimizedPercentage >= 0) {
+          infoMessage += `${optimizedPercentage.toFixed(2)}% increase`;
+        } else {
+          infoMessage += `${(optimizedPercentage * -1).toFixed(2)}% decrease`;
+        }
       }
 
       window.showInformationMessage(infoMessage);
