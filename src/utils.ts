@@ -66,9 +66,9 @@ export const getFileSize = (): number | null => {
     throw Error('Error reading file: ' + e.message);
   }
   return stats.size;
-}
+};
 
 export const getOptimizedPercentage = (fileSizeBefore: number, fileSizeAfter: number): number => {
   if (fileSizeBefore === fileSizeAfter) return 0;
-  return ((fileSizeAfter - fileSizeBefore) / fileSizeBefore)  * 100;
-}
+  return ((fileSizeAfter - fileSizeBefore) / fileSizeBefore) * 100;
+};

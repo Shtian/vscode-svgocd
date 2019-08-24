@@ -1,7 +1,14 @@
 import * as SVGO from 'svgo';
-import { window, workspace } from 'vscode';
+import { window } from 'vscode';
 import { getSVGOConfig } from './configuration';
-import { readCurrentFileContent, replaceDocument, readCurrentSelection, replaceSelection, getFileSize, getOptimizedPercentage } from './utils';
+import {
+  readCurrentFileContent,
+  replaceDocument,
+  readCurrentSelection,
+  replaceSelection,
+  getFileSize,
+  getOptimizedPercentage
+} from './utils';
 
 export default class SVGOCD {
   private svgoConfiguration: SVGO.Options;
