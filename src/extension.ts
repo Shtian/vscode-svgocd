@@ -21,6 +21,9 @@ export function activate(context: ExtensionContext): void {
       if (/(\.svgo\.ya?ml)/.test(doc.fileName)) {
         svgocd.readConfiguration();
       }
+    }),
+    workspace.onDidChangeWorkspaceFolders(() => {
+      svgocd.readConfiguration();
     })
   );
 }
