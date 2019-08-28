@@ -97,6 +97,11 @@ Supports all SVGO plguin settings through extension settings (`svgocd.plugins.*`
 
 ## Changelog
 
+## [1.1.1]
+
+- chore: update lock file with audit fix (#24)
+- fix: read conf on workspace change (#23)
+
 ## [1.1.0]
 
 - **feature**: add percentage file size change after optimization (by @lazreg87)
