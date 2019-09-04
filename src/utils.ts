@@ -1,5 +1,4 @@
 import { window, Range } from 'vscode';
-import { statSync } from 'fs';
 
 export const readCurrentFileContent = (): string | null => {
   const editor = window.activeTextEditor;
@@ -51,21 +50,6 @@ export const replaceSelection = (data: string): Thenable<boolean> => {
   return editor.edit(editBuilder => {
     editBuilder.replace(validatedRange, data);
   });
-};
-
-export const getFileSize = (): number | null => {
-  const editor = window.activeTextEditor;
-  if (typeof editor === 'undefined') {
-    return null;
-  }
-
-  let stats;
-  try {
-    stats = statSync(editor.document.fileName);
-  } catch (e) {
-    throw Error('Error reading file: ' + e.message);
-  }
-  return stats.size;
 };
 
 export const getOptimizedPercentage = (fileSizeBefore: number, fileSizeAfter: number): number => {
