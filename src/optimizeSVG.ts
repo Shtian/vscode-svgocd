@@ -6,28 +6,16 @@ import {
   replaceDocument,
   readCurrentSelection,
   replaceSelection,
-  getFileSize,
   getOptimizedPercentage
 } from './utils';
 
 export default class SVGOCD {
-  private svgoConfiguration: SVGO.Options;
-
-  constructor() {
-    this.svgoConfiguration = { plugins: [] };
-    this.readConfiguration();
-  }
-
-  public async readConfiguration(): Promise<void> {
-    this.svgoConfiguration = await getSVGOConfig();
-  }
-
   public async optimizeSVG(): Promise<boolean> {
+    const svgoConfig = await getSVGOConfig();
+
     const selection = readCurrentSelection();
     const text = readCurrentFileContent();
-    const beforeFileSize = getFileSize();
     const svgToOptimize = selection || text;
-    let infoMessage = 'SVG Optimized ✨';
 
     if (!svgToOptimize) {
       window.showErrorMessage(
@@ -37,7 +25,7 @@ export default class SVGOCD {
     }
 
     try {
-      const svgo = new SVGO(this.svgoConfiguration);
+      const svgo = new SVGO(svgoConfig);
       const optimizedSVG = await svgo.optimize(svgToOptimize);
       if (selection) {
         await replaceSelection(optimizedSVG.data);
@@ -49,24 +37,32 @@ export default class SVGOCD {
       if (typeof editor === 'undefined') {
         return false;
       }
+
       await editor.document.save();
 
-      const afterFileSize = getFileSize();
+      const optimizedPercentage = getOptimizedPercentage(
+        svgToOptimize.replace(/\r/g, '').length,
+        optimizedSVG.data.replace(/\r/g, '').length
+      );
 
-      if (afterFileSize && beforeFileSize) {
-        const optimizedPercentage = getOptimizedPercentage(beforeFileSize, afterFileSize);
-        if (optimizedPercentage >= 0) {
-          infoMessage += `${optimizedPercentage.toFixed(2)}% increase`;
-        } else {
-          infoMessage += `${(optimizedPercentage * -1).toFixed(2)}% decrease`;
-        }
-      }
-
+      const infoMessage = this.GenerateInfoMessage(optimizedPercentage);
       window.showInformationMessage(infoMessage);
       return true;
     } catch (error) {
       window.showErrorMessage(`Error during SVG Optimization: ${error}`);
       return false;
+    }
+  }
+
+  private GenerateInfoMessage(changePercentage: number): string {
+    const infoMessage = '✨ SVG Optimized';
+
+    if (changePercentage === 0) {
+      return `${infoMessage}, but size is unchanged`;
+    } else if (changePercentage > 0) {
+      return `${infoMessage} 📈 ${changePercentage.toFixed(2)}% increase`;
+    } else {
+      return `${infoMessage} 📉 ${changePercentage.toFixed(2)}% decrease`;
     }
   }
 }
