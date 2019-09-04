@@ -1,5 +1,10 @@
 # Change Log
 
+## [1.1.2]
+
+- fix: read config on command run (#25)
+- fix: calculate size based on svgo input/output (#25)
+
 ## [1.1.1]
 
 - chore: update lock file with audit fix (#24)
