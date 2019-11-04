@@ -1,5 +1,9 @@
 # Change Log
 
+## [1.1.3]
+
+- chore(package): update SVGO (1.3.2) and other patch releases
+
 ## [1.1.2]
 
 - fix: read config on command run (#25)
