@@ -6,7 +6,7 @@ import {
   replaceDocument,
   readCurrentSelection,
   replaceSelection,
-  getOptimizedPercentage
+  getOptimizedPercentage,
 } from './utils';
 
 export default class SVGOCD {

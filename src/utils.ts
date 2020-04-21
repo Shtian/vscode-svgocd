@@ -32,7 +32,7 @@ export const replaceDocument = (data: string): Thenable<boolean> => {
   const documentRange = new Range(0, 0, editor.document.lineCount, 0);
   const validatedRange = editor.document.validateRange(documentRange);
 
-  return editor.edit(editBuilder => {
+  return editor.edit((editBuilder) => {
     editBuilder.replace(validatedRange, data);
   });
 };
@@ -47,7 +47,7 @@ export const replaceSelection = (data: string): Thenable<boolean> => {
   const selectionRange = new Range(start, end);
   const validatedRange = editor.document.validateRange(selectionRange);
 
-  return editor.edit(editBuilder => {
+  return editor.edit((editBuilder) => {
     editBuilder.replace(validatedRange, data);
   });
 };
