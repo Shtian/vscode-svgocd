@@ -4,7 +4,7 @@
 <img alt="code style: prettier" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg">
 [![](https://vsmarketplacebadge.apphb.com/version/shtian.svgocd.svg)](https://marketplace.visualstudio.com/items?itemName=shtian.svgocd)
 <img alt="downloads" src="https://img.shields.io/visual-studio-marketplace/d/shtian.svgocd">
- [![Greenkeeper badge](https://badges.greenkeeper.io/Shtian/vscode-svgocd.svg)](https://greenkeeper.io/)
+ 
 
 ## Features
 
