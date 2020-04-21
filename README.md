@@ -97,6 +97,10 @@ Supports all SVGO plguin settings through extension settings (`svgocd.plugins.*`
 
 ## Changelog
 
+## [1.1.4]
+
+- chore(package): update prettier to major version 2
+
 ## [1.1.3]
 
 - chore(package): update SVGO (1.3.2) and other patch releases
