@@ -43,7 +43,7 @@ const getSVGOPluginsConfig = (): any[] => {
     return plugins;
   }
 
-  Object.keys(pluginsValues).map(c => {
+  Object.keys(pluginsValues).map((c) => {
     plugins.push({ [c]: pluginsValues[c] });
   });
 
