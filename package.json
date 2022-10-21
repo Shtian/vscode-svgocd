@@ -464,7 +464,8 @@
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
         "pretest": "npm run compile",
-        "lint": "eslint src/**/*.ts"
+        "lint": "eslint src/**/*.ts",
+        "preinstall": "npx only-allow pnpm"
     },
     "devDependencies": {
         "@types/glob": "^7.1.1",
