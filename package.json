@@ -6,7 +6,7 @@
     "author": "Stian Haga <hagastian@gmail.com> (https://github.com/shtian)",
     "version": "1.1.4",
     "engines": {
-        "vscode": "^1.39.0"
+        "vscode": "^1.72.0"
     },
     "categories": [
         "Extension Packs",
