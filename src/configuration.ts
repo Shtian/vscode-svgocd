@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// TODO: Add types
 import { Options, Js2SvgOptions } from 'svgo';
 import { workspace, RelativePattern } from 'vscode';
 import * as yaml from 'js-yaml';
@@ -26,7 +28,7 @@ const readSVGOYamlConfiguration = async (): Promise<Options | null> => {
   }
 
   const configFile = await workspace.openTextDocument(configFilePath);
-  return yaml.safeLoad(configFile.getText());
+  return yaml.load(configFile.getText());
 };
 
 const getSVGOJS2SVGConfig = (): Js2SvgOptions | undefined => {
