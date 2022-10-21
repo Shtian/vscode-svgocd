@@ -1,4 +1,4 @@
-import * as SVGO from 'svgo';
+import { optimize, OptimizedError, OptimizedSvg } from 'svgo';
 import { window } from 'vscode';
 import { getSVGOConfig } from './configuration';
 import {
@@ -8,6 +8,10 @@ import {
   replaceSelection,
   getOptimizedPercentage,
 } from './utils';
+
+function isOptimizedError(svgoResult: OptimizedSvg | OptimizedError): svgoResult is OptimizedError {
+  return typeof svgoResult.error !== 'undefined';
+}
 
 export default class SVGOCD {
   public async optimizeSVG(): Promise<boolean> {
@@ -25,12 +29,14 @@ export default class SVGOCD {
     }
 
     try {
-      const svgo = new SVGO(svgoConfig);
-      const optimizedSVG = await svgo.optimize(svgToOptimize);
+      const optimizedSVGResult = optimize(svgToOptimize, svgoConfig);
+
+      if (isOptimizedError(optimizedSVGResult)) throw new Error(optimizedSVGResult.error);
+
       if (selection) {
-        await replaceSelection(optimizedSVG.data);
+        await replaceSelection(optimizedSVGResult.data);
       } else {
-        await replaceDocument(optimizedSVG.data);
+        await replaceDocument(optimizedSVGResult.data);
       }
 
       const editor = window.activeTextEditor;
@@ -42,7 +48,7 @@ export default class SVGOCD {
 
       const optimizedPercentage = getOptimizedPercentage(
         svgToOptimize.replace(/\r/g, '').length,
-        optimizedSVG.data.replace(/\r/g, '').length
+        optimizedSVGResult.data.replace(/\r/g, '').length
       );
 
       const infoMessage = this.GenerateInfoMessage(optimizedPercentage);
