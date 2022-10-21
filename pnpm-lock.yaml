@@ -2,7 +2,6 @@ lockfileVersion: 5.4
 
 specifiers:
   '@types/glob': ^7.2.0
-  '@types/js-yaml': ^3.12.7
   '@types/node': ^13.1.0
   '@types/svgo': ^2.6.4
   '@types/vscode': ^1.72.0
@@ -12,19 +11,16 @@ specifiers:
   eslint: ^8.25.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-prettier: ^4.2.1
-  js-yaml: ^4.1.0
   prettier: ^2.7.1
   svgo: ^2.8.0
   typescript: ^4.8.4
 
 dependencies:
   deepmerge: 4.2.2
-  js-yaml: 4.1.0
   svgo: 2.8.0
 
 devDependencies:
   '@types/glob': 7.2.0
-  '@types/js-yaml': 3.12.7
   '@types/node': 13.13.52
   '@types/svgo': 2.6.4
   '@types/vscode': 1.72.0
@@ -106,10 +102,6 @@ packages:
     dependencies:
       '@types/minimatch': 3.0.3
       '@types/node': 13.13.52
-    dev: true
-
-  /@types/js-yaml/3.12.7:
-    resolution: {integrity: sha512-S6+8JAYTE1qdsc9HMVsfY7+SgSuUU/Tp6TYTmITW0PZxiyIMvol3Gy//y69Wkhs0ti4py5qgR3uZH6uz/DNzJQ==}
     dev: true
 
   /@types/json-schema/7.0.11:
@@ -303,6 +295,7 @@ packages:
 
   /argparse/2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
+    dev: true
 
   /array-union/2.1.0:
     resolution: {integrity: sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==}
@@ -804,6 +797,7 @@ packages:
     hasBin: true
     dependencies:
       argparse: 2.0.1
+    dev: true
 
   /json-schema-traverse/0.4.1:
     resolution: {integrity: sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==}
