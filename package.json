@@ -4,7 +4,7 @@
     "description": "SVGO extension for VS Code, fully configurable.",
     "publisher": "shtian",
     "author": "Stian Haga <hagastian@gmail.com> (https://github.com/shtian)",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "engines": {
         "vscode": "^1.72.0"
     },
