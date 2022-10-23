@@ -58,6 +58,5 @@ export const getSVGOConfig = async (): Promise<OptimizeOptions> => {
     return extensionSettings;
   }
 
-  const deepmergedConfig = deepmerge(extensionSettings, svgoConfigFile);
-  return deepmergedConfig;
+  return deepmerge(extensionSettings, svgoConfigFile);
 };
