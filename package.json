@@ -463,7 +463,7 @@
         "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
         "esbuild": "pnpm esbuild-base --sourcemap",
         "esbuild-watch": "pnpm esbuild-base --sourcemap --watch",
-        "vscode:prepublish": "npm run esbuild-base -- --minify",
+        "vscode:prepublish": "pnpm esbuild-base --minify",
         "test-compile": "tsc -p ./",
         "pretest": "pnpm test-compile",
         "lint": "eslint src/**/*.ts",
