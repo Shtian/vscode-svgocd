@@ -1,4 +1,4 @@
-import { optimize, OptimizedError, OptimizedSvg } from 'svgo';
+import { optimize } from 'svgo';
 import { window } from 'vscode';
 import { getSVGOConfig } from './configuration';
 import {
@@ -8,10 +8,6 @@ import {
   replaceSelection,
   getOptimizedPercentage,
 } from './utils';
-
-function isOptimizedError(svgoResult: OptimizedSvg | OptimizedError): svgoResult is OptimizedError {
-  return typeof svgoResult.error !== 'undefined';
-}
 
 export default class SVGOCD {
   public async optimizeSVG(): Promise<boolean> {
@@ -30,8 +26,6 @@ export default class SVGOCD {
 
     try {
       const optimizedSVGResult = optimize(svgToOptimize, svgoConfig);
-
-      if (isOptimizedError(optimizedSVGResult)) throw new Error(optimizedSVGResult.error);
 
       if (selection) {
         await replaceSelection(optimizedSVGResult.data);
