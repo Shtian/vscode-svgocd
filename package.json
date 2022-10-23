@@ -33,7 +33,7 @@
     "activationEvents": [
         "onCommand:svgocd.run"
     ],
-    "main": "./out/extension.js",
+    "main": "./out/main.js",
     "contributes": {
         "commands": [
             {
@@ -460,10 +460,12 @@
         "publish:minor": "vsce publish minor -m \"Minor version %s\"",
         "publish:major": "vsce publish major -m \"Major version %s\"",
         "postversion": "git push && git push --tags",
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "pretest": "npm run compile",
+        "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+        "esbuild": "pnpm esbuild-base --sourcemap",
+        "esbuild-watch": "pnpm esbuild-base --sourcemap --watch",
+        "vscode:prepublish": "npm run esbuild-base -- --minify",
+        "test-compile": "tsc -p ./",
+        "pretest": "pnpm test-compile",
         "lint": "eslint src/**/*.ts",
         "preinstall": "npx only-allow pnpm"
     },
@@ -474,6 +476,7 @@
         "@types/vscode": "^1.72.0",
         "@typescript-eslint/eslint-plugin": "^5.40.1",
         "@typescript-eslint/parser": "^5.40.1",
+        "esbuild": "^0.15.12",
         "eslint": "^8.25.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.2.1",

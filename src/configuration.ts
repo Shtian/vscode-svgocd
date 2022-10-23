@@ -1,6 +1,6 @@
 import { DefaultPlugins, Js2SvgOptions, loadConfig, OptimizeOptions, Plugin } from 'svgo';
 import { workspace } from 'vscode';
-import * as deepmerge from 'deepmerge';
+import deepmerge = require('deepmerge');
 
 type VSCodeSVGOConfigValueType = {
   [key: string]: boolean | object;
