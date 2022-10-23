@@ -1,4 +1,11 @@
 # Change Log
+## [2.0.0]
+
+- **feature**: update svgo to v2 and support new config file setup
+- chore: use esbuild for bundling
+- chore: update eslint and prettier packages
+- ci: migrate from devops pipelines to github actions
+- chore: migrate from npm to pnpm
 
 ## [1.1.4]
 

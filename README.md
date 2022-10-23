@@ -6,20 +6,21 @@
 <img alt="downloads" src="https://img.shields.io/visual-studio-marketplace/d/shtian.svgocd">
  [![Known Vulnerabilities](https://snyk.io/test/github/shtian/vscode-svgocd/badge.svg)](https://snyk.io/test/github/shtian/vscode-svgocd)
 
-## Features
+## ✨ Features
 
-Supports running SVGO on the current open SVG file in VS Code or currently selected SVG. Simply open the command palette and type SVGOCD and you should find the command `SVGOCD: Optimize current SVG`.
-
-Also supports editing plugin settings from both extension settings or through having a svgo.config.{js,mjs,cjs} file in the workspace.
+* Run SVGO on current open SVG file, or within text selection, through the extension command `SVGOCD: Optimize current SVG`
+* Looks for and reads svgo.config.{js, mjs, cjs} file in the workspace
+* Configure SVGO plugins directly through the SVGOCDs plugin settings
+* Reports file size change upon optimization
 
 ![Workflow](images/howto.gif)
 
-## Settings
+## ⚙️ Settings
 Settings can either be configured from the extension settings or having a svgo.config.{js,mjs,cjs} file in the workspace directory. A svgo config file will override the extension settings. See the [svgo npm package repository](https://github.com/svg/svgo#configuration) for more information about configuration. 
 
 ### Config file
   
-```yaml
+```js
 module.exports = {
   multipass:
   js2svg: {
@@ -38,7 +39,7 @@ module.exports = {
 ```
 
 ### Extension settings
-Supports all SVGO plguin settings through extension settings (`svgocd.plugins.*`). Boolean values to enable/disable or object values for plugin settings can be used. Full list of plugins from https://github.com/svg/svgo :
+Supports all default SVGO plugin settings through extension settings (`svgocd.plugins.*`). Boolean values to enable/disable or object values for plugin settings can be used. Full list of plugins from https://github.com/svg/svgo :
 
 <details>
   <summary>View all plugin settings</summary>
@@ -98,6 +99,13 @@ Supports all SVGO plguin settings through extension settings (`svgocd.plugins.*`
 </details>
 
 ## Changelog
+## [2.0.0]
+
+- **feature**: update svgo to v2 and support new config file setup
+- chore: use esbuild for bundling
+- chore: update eslint and prettier packages
+- ci: migrate from devops pipelines to github actions
+- chore: migrate from npm to pnpm
 
 ## [1.1.4]
 
