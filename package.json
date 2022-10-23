@@ -346,7 +346,7 @@
                             "boolean",
                             "object"
                         ],
-                        "default": false,
+                        "default": true,
                         "description": "sort element attributes for epic readability (disabled by default)"
                     },
                     "svgocd.plugins.sortDefsChildren": {
