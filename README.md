@@ -15,24 +15,26 @@ Also supports editing plugin settings from both extension settings or through ha
 ![Workflow](images/howto.gif)
 
 ## Settings
-Settings can either be configured from the extension settings or having a .svgo.yml file in the root directory. A .svgo.yml file will override the extension settings.
+Settings can either be configured from the extension settings or having a svgo.config.{js,mjs,cjs} file in the workspace directory. A svgo config file will override the extension settings. See the [svgo npm package repository](https://github.com/svg/svgo#configuration) for more information about configuration. 
 
 ### Config file
   
 ```yaml
-plugins:
-  - removeDoctype
-  - removeXMLProcInst
-  - removeComments
-  - removeMetadata
-  - removeXMLNS
-  - removeEditorsNSData
-  - cleanupAttrs: false  
-  - removeTitle: true
-
-js2svg:
-  pretty: true
-  indent: 2
+module.exports = {
+  multipass:
+  js2svg: {
+    indent: 2,
+    pretty: true,
+  },
+  plugins: [
+    {
+      name: 'sortAttrs',
+      params: {
+        xmlnsOrder: 'alphabetical',
+      },
+    },
+  ],
+};
 ```
 
 ### Extension settings

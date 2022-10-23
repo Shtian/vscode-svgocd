@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// TODO: Add types
-import { Options, Js2SvgOptions } from 'svgo';
-import { workspace, RelativePattern } from 'vscode';
-import * as yaml from 'js-yaml';
+import { DefaultPlugins, Js2SvgOptions, loadConfig, OptimizeOptions, Plugin } from 'svgo';
+import { workspace } from 'vscode';
 import * as deepmerge from 'deepmerge';
+
+type VSCodeSVGOConfigValueType = {
+  [key: string]: boolean | object;
+};
 
 const readExtensionConfiguration = <T>(section: string, value: string): T | null => {
   const configSection = workspace.getConfiguration(section);
@@ -16,49 +17,46 @@ const readExtensionConfiguration = <T>(section: string, value: string): T | null
   return configValue;
 };
 
-const readSVGOYamlConfiguration = async (): Promise<Options | null> => {
-  const [rootFolder = null] = workspace.workspaceFolders || [];
-  if (!rootFolder) {
-    return null;
-  }
-
-  const [configFilePath] = await workspace.findFiles(new RelativePattern(rootFolder, '.svgo.{yml,yaml}'));
-  if (!configFilePath) {
-    return null;
-  }
-
-  const configFile = await workspace.openTextDocument(configFilePath);
-  return yaml.load(configFile.getText());
+const getSVGOJS2SVGExtensionSettings = (): Js2SvgOptions | undefined => {
+  const js2svgConfig = readExtensionConfiguration<Js2SvgOptions>('svgocd', 'js2svg');
+  return js2svgConfig === null ? undefined : js2svgConfig;
 };
 
-const getSVGOJS2SVGConfig = (): Js2SvgOptions | undefined => {
-  const js2svgConfig: Js2SvgOptions | undefined = readExtensionConfiguration<any>('svgocd', 'js2svg');
-  return js2svgConfig;
-};
-
-const getSVGOPluginsConfig = (): any[] => {
-  const pluginsValues = readExtensionConfiguration<any>('svgocd', 'plugins');
-  // TODO: Read .svgo.y(a)ml with js.yaml
-  const plugins: any[] = [];
+const getSVGOExtensionSettings = (): Plugin[] => {
+  const pluginsValues = readExtensionConfiguration<VSCodeSVGOConfigValueType>('svgocd', 'plugins');
 
   if (!pluginsValues) {
-    return plugins;
+    return [];
   }
 
-  Object.keys(pluginsValues).map((c) => {
-    plugins.push({ [c]: pluginsValues[c] });
-  });
-
+  const plugins = Object.keys(pluginsValues)
+    .map((pluginKey) => {
+      const pluginValue = pluginsValues[pluginKey];
+      if (typeof pluginValue === 'boolean' && pluginValue) {
+        return pluginKey as DefaultPlugins['name'];
+      }
+      if (typeof pluginValue === 'object') {
+        return { name: pluginKey, params: pluginValue } as Plugin;
+      }
+    })
+    .filter((plugin) => typeof plugin !== 'undefined') as Plugin[];
   return plugins;
 };
 
-export const getSVGOConfig = async (): Promise<Options> => {
-  const plugins = getSVGOPluginsConfig();
-  const js2svg = getSVGOJS2SVGConfig();
-  const svgoYmlConfig = await readSVGOYamlConfiguration();
-  if (!svgoYmlConfig) {
-    return { plugins, js2svg };
+const getSVGOFileConfig = async (): Promise<OptimizeOptions | null> => {
+  const [configFiles] = await workspace.findFiles('**/svgo.config.{js,mjs,cjs}', '**/node_modules/**', 1);
+  if (!configFiles) return null;
+  return loadConfig(configFiles.fsPath);
+};
+
+export const getSVGOConfig = async (): Promise<OptimizeOptions> => {
+  const plugins = getSVGOExtensionSettings();
+  const js2svg = getSVGOJS2SVGExtensionSettings();
+  const svgoConfigFile = await getSVGOFileConfig();
+  const extensionSettings = { plugins, js2svg } as OptimizeOptions;
+  if (!svgoConfigFile) {
+    return extensionSettings;
   }
 
-  return deepmerge({ plugins, js2svg }, svgoYmlConfig);
+  return deepmerge(extensionSettings, svgoConfigFile);
 };
