@@ -15,12 +15,12 @@ const readExtensionConfiguration = <T>(section: string, value: string): T | null
   return configValue;
 };
 
-const getSVGOJS2SVGConfig = (): Js2SvgOptions | undefined => {
+const getSVGOJS2SVGExtensionSettings = (): Js2SvgOptions | undefined => {
   const js2svgConfig: Js2SvgOptions | undefined = readExtensionConfiguration<any>('svgocd', 'js2svg');
   return js2svgConfig;
 };
 
-const getSVGOPluginsConfig = (): any[] => {
+const getSVGOExtensionSettings = (): any[] => {
   const pluginsValues = readExtensionConfiguration<any>('svgocd', 'plugins');
   // TODO: Read .svgo.y(a)ml with js.yaml
   const plugins: any[] = [];
@@ -36,10 +36,16 @@ const getSVGOPluginsConfig = (): any[] => {
   return plugins;
 };
 
+const getSVGOFileConfig = async (): Promise<OptimizeOptions | null> => {
+  const [configFiles] = await workspace.findFiles('**/svgo.config.{js,mjs,cjs}', '**/node_modules/**', 1);
+  if (!configFiles) return null;
+  return loadConfig(configFiles.fsPath);
+};
+
 export const getSVGOConfig = async (): Promise<OptimizeOptions> => {
-  const plugins = getSVGOPluginsConfig();
-  const js2svg = getSVGOJS2SVGConfig();
-  const svgoYmlConfig = await loadConfig();
+  const plugins = getSVGOExtensionSettings();
+  const js2svg = getSVGOJS2SVGExtensionSettings();
+  const svgoYmlConfig = await getSVGOFileConfig();
   if (!svgoYmlConfig) {
     return { plugins, js2svg };
   }
