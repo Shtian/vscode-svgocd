@@ -456,9 +456,9 @@
         ]
     },
     "scripts": {
-        "publish:patch": "vsce publish patch -m \"Patch version %s\"",
-        "publish:minor": "vsce publish minor -m \"Minor version %s\"",
-        "publish:major": "vsce publish major -m \"Major version %s\"",
+        "publish:patch": "vsce publish patch -m \"Patch version %s\" --no-dependencies",
+        "publish:minor": "vsce publish minor -m \"Minor version %s\" --no-dependencies",
+        "publish:major": "vsce publish major -m \"Major version %s\" --no-dependencies",
         "postversion": "git push && git push --tags",
         "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
         "esbuild": "pnpm esbuild-base --sourcemap",
