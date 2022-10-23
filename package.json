@@ -472,7 +472,6 @@
     "devDependencies": {
         "@types/glob": "^7.2.0",
         "@types/node": "^13.1.0",
-        "@types/svgo": "^2.6.4",
         "@types/vscode": "^1.72.0",
         "@typescript-eslint/eslint-plugin": "^5.40.1",
         "@typescript-eslint/parser": "^5.40.1",
@@ -485,6 +484,6 @@
     },
     "dependencies": {
         "deepmerge": "^4.2.2",
-        "svgo": "^2.8.0"
+        "svgo": "^3.0.0"
     }
 }
