@@ -1,4 +1,15 @@
 # Change Log
+
+## [3.1.0]
+
+* **feature**: update svgo to v3
+* fix: optimize() now throws all errors
+* fix: sortAttrs is now enabled by default
+* fix: rename cleanupIDs to cleanupIds
+* docs: update config section to reflect CJS requirement
+* fix: update configuration settings with new types and import strategy
+* docs: update example svg
+
 ## [3.0.1]
 
 - docs: update changelog to match version

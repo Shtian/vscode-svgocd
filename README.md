@@ -102,6 +102,17 @@ Supports all default SVGO plugin settings through extension settings (`svgocd.pl
 </details>
 
 ## Changelog
+
+## [3.1.0]
+
+* **feature**: update svgo to v3
+* fix: optimize() now throws all errors
+* fix: sortAttrs is now enabled by default
+* fix: rename cleanupIDs to cleanupIds
+* docs: update config section to reflect CJS requirement
+* fix: update configuration settings with new types and import strategy
+* docs: update example svg
+
 ## [3.0.1]
 
 - docs: update changelog to match version
@@ -113,6 +124,7 @@ Supports all default SVGO plugin settings through extension settings (`svgocd.pl
 - chore: update eslint and prettier packages
 - ci: migrate from devops pipelines to github actions
 - chore: migrate from npm to pnpm
+
 ## [2.0.0]
 
 Skipped
