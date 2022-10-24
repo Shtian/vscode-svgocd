@@ -1,6 +1,7 @@
-import { DefaultPlugins, Js2SvgOptions, loadConfig, OptimizeOptions, Plugin } from 'svgo';
-import { workspace } from 'vscode';
+import { BuiltinPluginWithOptionalParams, Config, PluginConfig } from 'svgo';
+import { window, workspace } from 'vscode';
 import deepmerge = require('deepmerge');
+import { StringifyOptions } from 'svgo/lib/types';
 
 type VSCodeSVGOConfigValueType = {
   [key: string]: boolean | object;
@@ -17,12 +18,12 @@ const readExtensionConfiguration = <T>(section: string, value: string): T | null
   return configValue;
 };
 
-const getSVGOJS2SVGExtensionSettings = (): Js2SvgOptions | undefined => {
-  const js2svgConfig = readExtensionConfiguration<Js2SvgOptions>('svgocd', 'js2svg');
+const getSVGOJS2SVGExtensionSettings = (): StringifyOptions | undefined => {
+  const js2svgConfig = readExtensionConfiguration<StringifyOptions>('svgocd', 'js2svg');
   return js2svgConfig === null ? undefined : js2svgConfig;
 };
 
-const getSVGOExtensionSettings = (): Plugin[] => {
+const getSVGOExtensionSettings = (): PluginConfig[] => {
   const pluginsValues = readExtensionConfiguration<VSCodeSVGOConfigValueType>('svgocd', 'plugins');
 
   if (!pluginsValues) {
@@ -33,27 +34,42 @@ const getSVGOExtensionSettings = (): Plugin[] => {
     .map((pluginKey) => {
       const pluginValue = pluginsValues[pluginKey];
       if (typeof pluginValue === 'boolean' && pluginValue) {
-        return pluginKey as DefaultPlugins['name'];
+        return pluginKey as BuiltinPluginWithOptionalParams['name'];
       }
       if (typeof pluginValue === 'object') {
-        return { name: pluginKey, params: pluginValue } as Plugin;
+        return { name: pluginKey, params: pluginValue } as BuiltinPluginWithOptionalParams;
       }
     })
-    .filter((plugin) => typeof plugin !== 'undefined') as Plugin[];
+    .filter((plugin) => typeof plugin !== 'undefined') as PluginConfig[];
   return plugins;
 };
 
-const getSVGOFileConfig = async (): Promise<OptimizeOptions | null> => {
-  const [configFiles] = await workspace.findFiles('**/svgo.config.{js,mjs,cjs}', '**/node_modules/**', 1);
-  if (!configFiles) return null;
-  return loadConfig(configFiles.fsPath);
+const getSVGOFileConfig = async (): Promise<Config | null> => {
+  const [configFile] = await workspace.findFiles('**/svgo.config.{js,cjs,mjs}', '**/node_modules/**', 1);
+  if (!configFile) return null;
+
+  try {
+    if (configFile.path.endsWith('.mjs')) {
+      throw Error('ESM config files are not supported yet');
+    }
+    // VS Code extension runs in a CommonJS context, so we need to use require() here
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const config = require(configFile.fsPath);
+    if (config == null || typeof config !== 'object' || Array.isArray(config)) {
+      throw Error(`Invalid config file "${configFile}"`);
+    }
+    return config;
+  } catch (error) {
+    window.showErrorMessage(`Error loading svgo config file: ${error}`);
+    return null;
+  }
 };
 
-export const getSVGOConfig = async (): Promise<OptimizeOptions> => {
+export const getSVGOConfig = async (): Promise<Config> => {
   const plugins = getSVGOExtensionSettings();
   const js2svg = getSVGOJS2SVGExtensionSettings();
   const svgoConfigFile = await getSVGOFileConfig();
-  const extensionSettings = { plugins, js2svg } as OptimizeOptions;
+  const extensionSettings = { plugins, js2svg } as Config;
   if (!svgoConfigFile) {
     return extensionSettings;
   }

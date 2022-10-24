@@ -16,11 +16,14 @@
 ![Workflow](images/howto.gif)
 
 ## ⚙️ Settings
-Settings can either be configured from the extension settings or having a svgo.config.{js,mjs,cjs} file in the workspace directory. A svgo config file will override the extension settings. See the [svgo npm package repository](https://github.com/svg/svgo#configuration) for more information about configuration. 
+Settings can either be configured from the extension settings or having a svgo.config.{js,cjs} file in the workspace directory. A svgo config file will override the extension settings. See the [svgo npm package repository](https://github.com/svg/svgo#configuration) for more information about configuration. 
+
+⚠️ Note that since the extension runs as a CommonJS module in VS Code, only this format is supported by the plugin.
 
 ### Config file
   
 ```js
+/** @type {import('svgo').Config} */
 module.exports = {
   multipass:
   js2svg: {
@@ -73,7 +76,7 @@ Supports all default SVGO plugin settings through extension settings (`svgocd.pl
 | [removeUselessStrokeAndFill](https://github.com/svg/svgo/blob/master/plugins/removeUselessStrokeAndFill.js) | remove useless `stroke` and `fill` attrs |
 | [removeUnusedNS](https://github.com/svg/svgo/blob/master/plugins/removeUnusedNS.js) | remove unused namespaces declaration |
 | [prefixIds](https://github.com/svg/svgo/blob/master/plugins/prefixIds.js) | prefix IDs and classes with the SVG filename or an arbitrary string |
-| [cleanupIDs](https://github.com/svg/svgo/blob/master/plugins/cleanupIDs.js) | remove unused and minify used IDs |
+| [cleanupIds](https://github.com/svg/svgo/blob/master/plugins/cleanupIds.js) | remove unused and minify used IDs |
 | [cleanupNumericValues](https://github.com/svg/svgo/blob/master/plugins/cleanupNumericValues.js) | round numeric values to the fixed precision, remove default `px` units |
 | [cleanupListOfValues](https://github.com/svg/svgo/blob/master/plugins/cleanupListOfValues.js) | round numeric values in attributes that take a list of numbers (like `viewBox` or `enable-background`) |
 | [moveElemsAttrsToGroup](https://github.com/svg/svgo/blob/master/plugins/moveElemsAttrsToGroup.js) | move elements' attributes to their enclosing group |
@@ -83,7 +86,7 @@ Supports all default SVGO plugin settings through extension settings (`svgocd.pl
 | [mergePaths](https://github.com/svg/svgo/blob/master/plugins/mergePaths.js) | merge multiple Paths into one |
 | [convertShapeToPath](https://github.com/svg/svgo/blob/master/plugins/convertShapeToPath.js) | convert some basic shapes to `<path>` |
 | [convertEllipseToCircle](https://github.com/svg/svgo/blob/master/plugins/convertEllipseToCircle.js) | convert non-eccentric `<ellipse>` to `<circle>` |
-| [sortAttrs](https://github.com/svg/svgo/blob/master/plugins/sortAttrs.js) | sort element attributes for epic readability (disabled by default) |
+| [sortAttrs](https://github.com/svg/svgo/blob/master/plugins/sortAttrs.js) | sort element attributes for epic readability |
 | [sortDefsChildren](https://github.com/svg/svgo/blob/master/plugins/sortDefsChildren.js) | sort children of `<defs>` in order to improve compression |
 | [removeDimensions](https://github.com/svg/svgo/blob/master/plugins/removeDimensions.js) | remove `width`/`height` and add `viewBox` if it's missing (opposite to removeViewBox, disable it first) (disabled by default) |
 | [removeAttrs](https://github.com/svg/svgo/blob/master/plugins/removeAttrs.js) | remove attributes by pattern (disabled by default) |

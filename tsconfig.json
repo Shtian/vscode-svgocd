@@ -8,10 +8,17 @@
 		],
 		"sourceMap": true,
 		"rootDir": "src",
-		"strict": true
+		"strict": true,
+		"allowJs": true,
+		"skipLibCheck": true
 	},
 	"exclude": [
 		"node_modules",
-		".vscode-test"
+		".vscode-test",
+		"examples",
+		"out"
+	],
+	"include": [
+		"src"
 	]
 }

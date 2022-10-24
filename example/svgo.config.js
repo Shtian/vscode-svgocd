@@ -1,4 +1,4 @@
-/** @type {import('svgo').OptimizeOptions} */
+/** @type {import('svgo').Config} */
 module.exports = {
   multipass: true, // boolean. false by default
   js2svg: {
