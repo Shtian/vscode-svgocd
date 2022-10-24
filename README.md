@@ -16,11 +16,14 @@
 ![Workflow](images/howto.gif)
 
 ## ⚙️ Settings
-Settings can either be configured from the extension settings or having a svgo.config.{js,mjs,cjs} file in the workspace directory. A svgo config file will override the extension settings. See the [svgo npm package repository](https://github.com/svg/svgo#configuration) for more information about configuration. 
+Settings can either be configured from the extension settings or having a svgo.config.{js,cjs} file in the workspace directory. A svgo config file will override the extension settings. See the [svgo npm package repository](https://github.com/svg/svgo#configuration) for more information about configuration. 
+
+⚠️ Note that since the extension runs as a CommonJS module in VS Code, only this format is supported by the plugin.
 
 ### Config file
   
 ```js
+/** @type {import('svgo').Config} */
 module.exports = {
   multipass:
   js2svg: {
