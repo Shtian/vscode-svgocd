@@ -9,7 +9,8 @@
 		"sourceMap": true,
 		"rootDir": "src",
 		"strict": true,
-		"allowJs": true
+		"allowJs": true,
+		"skipLibCheck": true
 	},
 	"exclude": [
 		"node_modules",
