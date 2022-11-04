@@ -103,6 +103,10 @@ Supports all default SVGO plugin settings through extension settings (`svgocd.pl
 
 ## Changelog
 
+## [3.1.1]
+
+* fix: clear config from require cache before importing
+
 ## [3.1.0]
 
 * **feature**: update svgo to v3

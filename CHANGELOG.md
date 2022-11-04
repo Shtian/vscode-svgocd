@@ -1,5 +1,9 @@
 # Change Log
 
+## [3.1.1]
+
+* fix: clear config from require cache before importing
+
 ## [3.1.0]
 
 * **feature**: update svgo to v3
