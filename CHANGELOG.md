@@ -21,6 +21,7 @@
 - chore: update eslint and prettier packages
 - ci: migrate from devops pipelines to github actions
 - chore: migrate from npm to pnpm
+
 ## [2.0.0]
 
 Skipped
