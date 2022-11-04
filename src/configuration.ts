@@ -52,6 +52,16 @@ const getSVGOFileConfig = async (): Promise<Config | null> => {
     if (configFile.path.endsWith('.mjs')) {
       throw Error('ESM config files are not supported yet');
     }
+
+    // Reload the config file in case of changes
+    const requireCacheKeys = Object.keys(require.cache);
+    for (const key of requireCacheKeys) {
+      if (key === configFile.fsPath) {
+        delete require.cache[key];
+        break;
+      }
+    }
+
     // VS Code extension runs in a CommonJS context, so we need to use require() here
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const config = require(configFile.fsPath);
